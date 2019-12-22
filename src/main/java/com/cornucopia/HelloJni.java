@@ -1,17 +1,21 @@
 package com.cornucopia;
 
+import java.util.Date;
+import java.util.Random;
+import java.util.UUID;
+
 /**
  * jni开发流程demo
- *
- *
+ * <p>
+ * <p>
  * 1.在java中声明`native`方法.
  * 2.编译java源文件得到class文件，然后通过javah命令导出JNI的头文件。
- *  2.1 javac com/cornucopia/HelloJni
- *  2.2 javah com.cornucopia.HelloJni
+ * 2.1 javac com/cornucopia/HelloJni
+ * 2.2 javah com.cornucopia.HelloJni
  * 3.编写.c或者.cpp文件，实现JNI方法。
  * 4.编译so库，拷贝动态库至java.library.path本地裤搜索目录下，并在Java中调用。
- *  4.1  gcc -dynamiclib -I /Library/Java/JavaVirtualMachines/
- *       jdk1.8.0_161.jdk/Contents/Home/include/ test.cpp -o libhello.jnilib
+ * 4.1  gcc -dynamiclib -I /Library/Java/JavaVirtualMachines/
+ * jdk1.8.0_161.jdk/Contents/Home/include/ test.c -o libhello.jnilib
  *
  * @author cornucopia
  * @version 1.0
@@ -30,12 +34,32 @@ public class HelloJni {
 
     public static void main(String[] args) {
         HelloJni helloJni = new HelloJni();
-        System.out.println(helloJni.get());
-        helloJni.set("hello World!!!");
+//      HelloJni.accessStaticMethod();
+        String result=helloJni.chinesChars("中");
+        System.out.println(result);
     }
 
-    public native String get();
+    //访问非静态方法
+    public native void accessMethod();
 
-    public native void set(String str);
+    //访问静态方法
+    public native static void accessStaticMethod();
+
+    //访问构造方法
+    public native Date accessConstructor();
+
+
+    //转码
+    public native String chinesChars(String str);
+
+    //生成随机整形数
+    int getRandomInt(int max) {
+        return new Random().nextInt(max);
+    }
+
+    //生成随机UUID
+    static String getRandomUUID() {
+        return UUID.randomUUID().toString();
+    }
 
 }

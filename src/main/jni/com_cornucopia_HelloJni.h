@@ -9,18 +9,34 @@ extern "C" {
 #endif
 /*
  * Class:     com_cornucopia_HelloJni
- * Method:    get
- * Signature: ()Ljava/lang/String;
+ * Method:    accessMethod
+ * Signature: ()V
  */
-JNIEXPORT jstring JNICALL Java_com_cornucopia_HelloJni_get
+JNIEXPORT void JNICALL Java_com_cornucopia_HelloJni_accessMethod
   (JNIEnv *, jobject);
 
 /*
  * Class:     com_cornucopia_HelloJni
- * Method:    set
- * Signature: (Ljava/lang/String;)V
+ * Method:    accessStaticMethod
+ * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_com_cornucopia_HelloJni_set
+JNIEXPORT void JNICALL Java_com_cornucopia_HelloJni_accessStaticMethod
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     com_cornucopia_HelloJni
+ * Method:    accessConstructor
+ * Signature: ()Ljava/util/Date;
+ */
+JNIEXPORT jobject JNICALL Java_com_cornucopia_HelloJni_accessConstructor
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_cornucopia_HelloJni
+ * Method:    chinesChars
+ * Signature: (Ljava/lang/String;)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_cornucopia_HelloJni_chinesChars
   (JNIEnv *, jobject, jstring);
 
 #ifdef __cplusplus
